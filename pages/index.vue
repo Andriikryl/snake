@@ -15,9 +15,17 @@ onMounted(() => {
   }
   const ctx = canvas.value.getContext("2d");
   if (!ctx) return;
-  for(const segment of snake.value){
+  setInterval(() => {
+  const head = snake.value[snake.value.length - 1];
+  const newHead = { x: head.x + 1, y: head.y };
+  snake.value.push(newHead);
+  snake.value.shift();
+
+  ctx.clearRect(0, 0, canvas.value!.width, canvas.value!.height);
+  for (const segment of snake.value) {
     ctx.fillRect(segment.x * 20, segment.y * 20, 20, 20);
   }
+}, 1000);
 });
 </script>
 
