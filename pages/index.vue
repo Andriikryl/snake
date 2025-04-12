@@ -1,4 +1,12 @@
 <script setup lang="ts">
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 type Direction = "right" | "left" | "up" | "down";
 type GameStatus = "playing" | "pause" | "lost";
 
@@ -131,20 +139,28 @@ function startGame() {
 }
 </script>
 
-
-
 <template>
-  <div>
-    <h1>hello its snake game</h1>
-    <p>score: {{ score }}</p>
-    <button @click="startGame">Start Game</button>
-    <section>
-      <canvas
-        ref="canvas"
-        width="400"
-        height="400"
-        class="w-[400px] h-[400px] border"
-      />
-    </section>
-  </div>
+  <main class="max-w-[500px] flex justify-center items-center">
+    <Card>
+      <CardHeader>
+        <CardTitle>hello its snake game</CardTitle>
+        <CardDescription>
+          <p>score: {{ score }}</p>
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <section>
+          <canvas
+            ref="canvas"
+            width="400"
+            height="400"
+            class="w-[400px] h-[400px] border"
+          />
+        </section>
+      </CardContent>
+      <CardFooter>
+        <Button @click="startGame">Start Game</Button>
+      </CardFooter>
+    </Card>
+  </main>
 </template>
