@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Toaster } from '@/components/ui/sonner'
+import { toast } from 'vue-sonner'
 import {
   Card,
   CardContent,
@@ -99,7 +101,9 @@ onMounted(() => {
     );
 
     if (hitWall || hitSelf) {
-      alert("Game Over!");
+      toast('Status:', {
+        description: 'Game over',
+      });
       status.value = "lost";
       return;
     }
@@ -137,30 +141,40 @@ function startGame() {
   status.value = "playing";
   generateFood(canvasWidth, canvasHeight);
 }
+
+function handleStartGame() {
+  toast('Status:', {
+    description: 'Game start',
+  });
+  startGame();
+}
 </script>
 
 <template>
-  <main class="max-w-[500px] flex justify-center items-center">
-    <Card>
-      <CardHeader>
-        <CardTitle>hello its snake game</CardTitle>
-        <CardDescription>
-          <p>score: {{ score }}</p>
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <section>
-          <canvas
-            ref="canvas"
-            width="400"
-            height="400"
-            class="w-[400px] h-[400px] border"
-          />
-        </section>
-      </CardContent>
-      <CardFooter>
-        <Button @click="startGame">Start Game</Button>
-      </CardFooter>
-    </Card>
-  </main>
+  <Toaster />
+  <div class=" flex justify-center items-center mt-[100px]">
+    <main class="max-w-[500px] flex justify-center items-center">
+      <Card>
+        <CardHeader>
+          <CardTitle>hello its snake game</CardTitle>
+          <CardDescription>
+            <p>score: {{ score }}</p>
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <section>
+            <canvas
+              ref="canvas"
+              width="400"
+              height="400"
+              class="w-[400px] h-[400px] border"
+            />
+          </section>
+        </CardContent>
+        <CardFooter>
+          <Button @click="handleStartGame" variant="outline">Start Game</Button>
+        </CardFooter>
+      </Card>
+    </main>
+  </div>
 </template>
